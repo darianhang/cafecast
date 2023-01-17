@@ -20,6 +20,53 @@ img {
   height: 100%;
 }
 
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.info-container {
+  background-image: url("https://source.unsplash.com/random/?mountians");
+  width: 1000px;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  left: 25%;
+  transform: translate(-50%, 0%);
+  z-index: -1;
+}
+
 .swiper {
-  height: 100vh
+  height: 100vh;
+  width: 1020px;
+  margin-right: 0 !important;
+}
+
+time {
+  position: absolute;
+  top: 15%;
+  left: 23.5%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-size: 200px;
+  font-family: Helvetica, sans-serif;
+  color: white;
+}
+
+.date {
+  font-size: 50px;
+  top: 26%;
+}
+
+.note {
+  position: absolute;
+  bottom: 5%;
+  left: 23.5%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+  color: white;
 }

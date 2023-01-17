@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import Clock from 'react-live-clock';
 
 export default function Slideshow() {
     const [images, setImages] = React.useState([])
@@ -30,11 +31,15 @@ export default function Slideshow() {
 
     return (
         <div className="container">
-            <Swiper
+            <div className="info-container"></div>
+            <Clock format={'h:mm'} ticking={true} timezone={'US/Eastern'} />
+            <Clock className="date" format={'dddd, MMMM Mo'}/>
+            <div className="note">Work in progress! Please contact Darian for suggestions.</div>
+        <Swiper
                 slidesPerView={1}
                 loop={true}
                 spaceBetween={30}
-                centeredSlides={true}
+                centeredSlides={false}
                 autoplay={{
                 delay: 5000,
                 disableOnInteraction: false,
