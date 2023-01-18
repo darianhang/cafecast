@@ -48,7 +48,7 @@ export default function Slideshow() {
     }, images)
 
     let date = moment()
-    let currentDate = date.format('dddd MMMM Do')
+    let currentDate = date.format('dddd, MMMM Do')
 
     return (
         <div className="container">
