@@ -63,7 +63,7 @@ time {
 .note {
   position: absolute;
   bottom: 5%;
-  left: 23.5%;
+  left: 23.45%;
   transform: translate(-50%, -50%);
   z-index: 100;
   font-size: 18px;
@@ -74,7 +74,7 @@ time {
 .news {
   position: absolute;
   top: 60%;
-  left: 23.5%;
+  left: 23.45%;
   transform: translate(-50%, -50%);
   z-index: 100;
   font-family: Helvetica, sans-serif;
