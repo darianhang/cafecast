@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 import Clock from 'react-live-clock';
+import moment from "moment/moment.js";
 
 export default function Slideshow() {
     const [images, setImages] = React.useState([])
@@ -43,13 +44,17 @@ export default function Slideshow() {
         FetchNews()
         FetchWaag()
         setInterval(FetchWaag, 60000)
+        setInterval(FetchNews, 60000)
     }, images)
+
+    let date = moment()
+    let currentDate = date.format('dddd MMMM Do')
 
     return (
         <div className="container">
             <div className="info-container"></div>
             <Clock format={'h:mm'} ticking={true} timezone={'US/Eastern'} />
-            <Clock className="date" format={'dddd, MMMM Mo'}/>
+            <div className="date">{currentDate}</div>
             <div className="news">
                 {
                     news.map((data) => {

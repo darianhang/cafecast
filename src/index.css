@@ -56,6 +56,14 @@ time {
 }
 
 .date {
+  position: absolute;
+  top: 15%;
+  left: 23.5%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-size: 200px;
+  font-family: Helvetica, sans-serif;
+  color: white;
   font-size: 50px;
   top: 26%;
 }
