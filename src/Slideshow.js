@@ -8,13 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
-import Clock from 'react-live-clock';
-import moment from "moment/moment.js";
-
 export default function Slideshow() {
     const [images, setImages] = React.useState([])
-    const [news, setNews] = React.useState([])
-    function FetchWaag(){
+    function Fetch(){
         sanityClient
         .fetch(`*[released == true]{images}`)
             .then((data) => setImages(data.map((data) => {
@@ -22,58 +18,20 @@ export default function Slideshow() {
                     return data.asset._ref.replace("-png", ".png").replace("-jpg", ".jpg").replace("image-", "")
                 })
             }).flat()))
+            .then(console.log("hello"))
             .catch(console.error)
     }
-
-    function FetchNews(){
-        sanityClient
-        .fetch(`*[_type == "news"]`)
-            .then((data) => setNews(data.map((data) => {
-                return (
-                    {
-                        title: data.title,
-                        body: data.content[0].children[0].text
-                    }
-                )
-            })))
-            .then(console.log(news))
-            .catch(console.error)
-    }
-
     React.useEffect(() => {
-        FetchNews()
-        FetchWaag()
-        setInterval(FetchWaag, 60000)
-        setInterval(FetchNews, 60000)
+        Fetch()
+        setInterval(Fetch, 60000)
     }, images)
-
-    let date = moment()
-    let currentDate = date.format('dddd, MMMM Do')
-
     return (
         <div className="container">
-            <div className="info-container"></div>
-            <Clock format={'h:mm'} ticking={true} timezone={'US/Eastern'} />
-            <div className="date">{currentDate}</div>
-            <div className="news">
-                {
-                    news.map((data) => {
-                        return (
-                            <div className="news-item">
-                                <div className="news-title">{data.title}</div>
-                                <div className="news-body">{data.body}</div>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-    
-            <div className="note">Work in progress! Please contact Darian for suggestions.</div>
-        <Swiper
+            <Swiper
                 slidesPerView={1}
                 loop={true}
                 spaceBetween={30}
-                centeredSlides={false}
+                centeredSlides={true}
                 autoplay={{
                 delay: 5000,
                 disableOnInteraction: false,
