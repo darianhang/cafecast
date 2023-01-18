@@ -12,7 +12,8 @@ import Clock from 'react-live-clock';
 
 export default function Slideshow() {
     const [images, setImages] = React.useState([])
-    function Fetch(){
+    const [news, setNews] = React.useState([])
+    function FetchWaag(){
         sanityClient
         .fetch(`*[released == true]{images}`)
             .then((data) => setImages(data.map((data) => {
@@ -20,13 +21,28 @@ export default function Slideshow() {
                     return data.asset._ref.replace("-png", ".png").replace("-jpg", ".jpg").replace("image-", "")
                 })
             }).flat()))
-            .then(console.log("hello"))
+            .catch(console.error)
+    }
+
+    function FetchNews(){
+        sanityClient
+        .fetch(`*[_type == "news"]`)
+            .then((data) => setNews(data.map((data) => {
+                return (
+                    {
+                        title: data.title,
+                        body: data.content[0].children[0].text
+                    }
+                )
+            })))
+            .then(console.log(news))
             .catch(console.error)
     }
 
     React.useEffect(() => {
-        Fetch()
-        setInterval(Fetch, 60000)
+        FetchNews()
+        FetchWaag()
+        setInterval(FetchWaag, 60000)
     }, images)
 
     return (
@@ -34,6 +50,19 @@ export default function Slideshow() {
             <div className="info-container"></div>
             <Clock format={'h:mm'} ticking={true} timezone={'US/Eastern'} />
             <Clock className="date" format={'dddd, MMMM Mo'}/>
+            <div className="news">
+                {
+                    news.map((data) => {
+                        return (
+                            <div className="news-item">
+                                <div className="news-title">{data.title}</div>
+                                <div className="news-body">{data.body}</div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+    
             <div className="note">Work in progress! Please contact Darian for suggestions.</div>
         <Swiper
                 slidesPerView={1}
